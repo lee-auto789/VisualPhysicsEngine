@@ -40,8 +40,8 @@ void initVulkan() {
     for (const auto& device : devices) {
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device, &deviceProperties);
-        cout << "deviceProperties.deviceName = " << deviceProperties.deviceName << endl;
-        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
+        cout << "deviceProperties.deviceName = " << deviceProperties.deviceName << ":" << deviceProperties.deviceType << endl;
+        if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU) {
             cout << "Discrete GPU" << endl;
             selectedDevice = device;
             break;
