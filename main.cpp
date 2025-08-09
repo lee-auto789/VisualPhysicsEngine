@@ -3,6 +3,8 @@
 #include <vector>
 #include <stdexcept>
 #include <cstring>
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
 
 using namespace std;
 
@@ -15,6 +17,11 @@ using namespace std;
 const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
 };
+
+const uint32_t WIDTH = 800;
+const uint32_t HEIGHT = 600;
+
+GLFWwindow* window;
 
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
@@ -51,6 +58,19 @@ bool checkValidationLayerSupport() {
     return true;
 }
 
+void initWindow() {
+    glfwInit();
+    
+    // Tell GLFW not to create an OpenGL context
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+    
+    window = glfwCreateWindow(WIDTH, HEIGHT, "Visual Physics Engine", nullptr, nullptr);
+    if (!window) {
+        throw std::runtime_error("Failed to create GLFW window!");
+    }
+}
+
 void initVulkan() {
     cout << "initVulkan" << endl;
     
@@ -70,6 +90,14 @@ void initVulkan() {
     VkInstanceCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     createInfo.pApplicationInfo = &appInfo;
+
+    // Get required extensions from GLFW
+    uint32_t glfwExtensionCount = 0;
+    const char** glfwExtensions;
+    glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
+    
+    createInfo.enabledExtensionCount = glfwExtensionCount;
+    createInfo.ppEnabledExtensionNames = glfwExtensions;
 
     // Enable validation layers in debug mode
     if (enableValidationLayers) {
@@ -145,6 +173,27 @@ void initVulkan() {
     VkQueue queue;
     vkGetDeviceQueue(device, 0, 0, &queue);
 
+    // Create surface
+    VkSurfaceKHR surface;
+    if (glfwCreateWindowSurface(instance, window, nullptr, &surface) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create window surface!");
+    }
+    cout << "Surface created successfully!" << endl;
+
+    // Get surface formats
+    uint32_t formatCount;
+    vkGetPhysicalDeviceSurfaceFormatsKHR(selectedDevice, surface, &formatCount, nullptr);
+    cout << "formatCount = " << formatCount << endl;
+
+    std::vector<VkSurfaceFormatKHR> surfaceFormats(formatCount);
+    vkGetPhysicalDeviceSurfaceFormatsKHR(selectedDevice, surface, &formatCount, surfaceFormats.data());
+    
+    // Display surface formats
+    for (size_t i = 0; i < surfaceFormats.size(); ++i) {
+        cout << "Surface format " << i << ": " << surfaceFormats[i].format << endl;
+    }
+
+
     vkDestroyDevice(device, nullptr);
 
 
@@ -156,9 +205,20 @@ void mainLoop() {
 
 int main() {
     try {
+        initWindow();
         initVulkan();
+        
+        // Keep window open for a moment to see it
+        cout << "Window created! Press any key to continue..." << endl;
+        cin.get();
+        
+        // Cleanup
+        glfwDestroyWindow(window);
+        glfwTerminate();
+        
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
+        glfwTerminate();
         return EXIT_FAILURE;
     }
     return 0;
