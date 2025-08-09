@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vulkan.h>
+#include <vulkan/vulkan.h>
 #include <vector>
 #include <stdexcept>
 
@@ -40,7 +40,7 @@ void initVulkan() {
     for (const auto& device : devices) {
         VkPhysicalDeviceProperties deviceProperties;
         vkGetPhysicalDeviceProperties(device, &deviceProperties);
-        cout << "deviceProperties.deviceName = " << deviceProperties.deviceName.data() << endl;
+        cout << "deviceProperties.deviceName = " << deviceProperties.deviceName << endl;
         if (deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU) {
             cout << "Discrete GPU" << endl;
             selectedDevice = device;
@@ -54,7 +54,7 @@ void initVulkan() {
 
     VkPhysicalDeviceProperties deviceProperties;
     vkGetPhysicalDeviceProperties(selectedDevice, &deviceProperties);
-    cout << "deviceProperties.deviceName = " << deviceProperties.deviceName.data() << endl;
+    cout << "deviceProperties.deviceName = " << deviceProperties.deviceName << endl;
 
     VkPhysicalDeviceFeatures deviceFeatures;
     vkGetPhysicalDeviceFeatures(selectedDevice, &deviceFeatures);
@@ -70,9 +70,16 @@ void initVulkan() {
     queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
     queueCreateInfo.queueFamilyIndex = 0;
     queueCreateInfo.queueCount = 1;
+    float queuePriority = 1.0f;
+    queueCreateInfo.pQueuePriorities = &queuePriority;
+
+    VkDeviceCreateInfo deviceCreateInfo = {};
+    deviceCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+    deviceCreateInfo.queueCreateInfoCount = 1;
+    deviceCreateInfo.pQueueCreateInfos = &queueCreateInfo;
 
     VkDevice device;
-    vkCreateDevice(selectedDevice, &queueCreateInfo, nullptr, &device);
+    vkCreateDevice(selectedDevice, &deviceCreateInfo, nullptr, &device);
 
     VkQueue queue;
     vkGetDeviceQueue(device, 0, 0, &queue);
