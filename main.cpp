@@ -1,4 +1,8 @@
 #include <iostream>
+#include <vulkan.h>
+#include <vector>
+#include <stdexcept>
+
 using namespace std;
 
 void initVulkan() {
@@ -83,10 +87,12 @@ void mainLoop() {
 }
 
 int main() {
-    int a = 10;
-    int b = 20;
-    int c = a + b;
-    cout << "c = " << c << endl;
+    try {
+        initVulkan();
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return EXIT_FAILURE;
+    }
     return 0;
 }
 
