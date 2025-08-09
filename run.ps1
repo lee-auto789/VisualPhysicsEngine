@@ -3,12 +3,19 @@
 
 Write-Host "=== Running VisualPhysicsEngine ===" -ForegroundColor Green
 
-# Check if executable exists
-$exePath = "build/Release/VisualPhysicsEngine.exe"
+# Check if executable exists (try Debug first, then Release)
+$exePath = "build/Debug/VisualPhysicsEngine.exe"
 if (!(Test-Path $exePath)) {
-    Write-Host "❌ Executable not found: $exePath" -ForegroundColor Red
-    Write-Host "Please run './compile.ps1' first to build the project." -ForegroundColor Yellow
-    exit 1
+    $exePath = "build/Release/VisualPhysicsEngine.exe"
+    if (!(Test-Path $exePath)) {
+        Write-Host "❌ Executable not found in Debug or Release" -ForegroundColor Red
+        Write-Host "Please run './compile.ps1' first to build the project." -ForegroundColor Yellow
+        exit 1
+    } else {
+        Write-Host "⚠️  Running Release build (validation layers disabled)" -ForegroundColor Yellow
+    }
+} else {
+    Write-Host "🔍 Running Debug build (validation layers enabled)" -ForegroundColor Magenta
 }
 
 Write-Host "Starting application..." -ForegroundColor Yellow

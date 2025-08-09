@@ -1,0 +1,10 @@
+^D:\INTELLIGENT\VISUALPHYSICSENGINE\BUILD\CMAKEFILES\8EC601B95B48D2FA922AC3D4F3F63A09\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Intelligent/VisualPhysicsEngine -BD:/Intelligent/VisualPhysicsEngine/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/Intelligent/VisualPhysicsEngine/build/VisualPhysicsEngine.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

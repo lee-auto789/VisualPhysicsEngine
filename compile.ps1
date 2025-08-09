@@ -20,15 +20,16 @@ try {
         throw "CMake configuration failed"
     }
 
-    # Build the project
-    Write-Host "Building project..." -ForegroundColor Yellow
-    cmake --build . --config Release
+    # Build the project in Debug mode (for validation layers)
+    Write-Host "Building project in Debug mode (validation layers enabled)..." -ForegroundColor Yellow
+    cmake --build . --config Debug
     if ($LASTEXITCODE -ne 0) {
         throw "Build failed"
     }
 
     Write-Host "✅ Compilation successful!" -ForegroundColor Green
-    Write-Host "Executable created: build/Release/VisualPhysicsEngine.exe" -ForegroundColor Cyan
+    Write-Host "Executable created: build/Debug/VisualPhysicsEngine.exe" -ForegroundColor Cyan
+    Write-Host "Validation layers are ENABLED in Debug build" -ForegroundColor Magenta
 } catch {
     Write-Host "❌ Compilation failed: $_" -ForegroundColor Red
     Set-Location ".."
