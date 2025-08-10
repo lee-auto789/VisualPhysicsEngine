@@ -26,6 +26,22 @@ const uint32_t HEIGHT = 600;
 
 GLFWwindow* window;
 
+// Struct definitions
+struct QueueFamilyIndices {
+    uint32_t graphicsFamily = UINT32_MAX;
+    uint32_t presentFamily = UINT32_MAX;
+    
+    bool isComplete() {
+        return graphicsFamily != UINT32_MAX && presentFamily != UINT32_MAX;
+    }
+};
+
+struct SwapChainSupportDetails {
+    VkSurfaceCapabilitiesKHR capabilities;
+    std::vector<VkSurfaceFormatKHR> formats;
+    std::vector<VkPresentModeKHR> presentModes;
+};
+
 // Forward declarations
 void createInstance();
 void createSurface();
@@ -56,24 +72,6 @@ VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 VkShaderModule createShaderModule(const std::vector<uint32_t>& code);
 uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 bool checkValidationLayerSupport();
-
-
-
-// Struct definitions
-struct QueueFamilyIndices {
-    uint32_t graphicsFamily = UINT32_MAX;
-    uint32_t presentFamily = UINT32_MAX;
-    
-    bool isComplete() {
-        return graphicsFamily != UINT32_MAX && presentFamily != UINT32_MAX;
-    }
-};
-
-struct SwapChainSupportDetails {
-    VkSurfaceCapabilitiesKHR capabilities;
-    std::vector<VkSurfaceFormatKHR> formats;
-    std::vector<VkPresentModeKHR> presentModes;
-};
 
 // Vertex structure
 struct Vertex {
