@@ -45,6 +45,18 @@ void drawFrame();
 void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 void cleanup();
 
+// Helper function forward declarations
+bool isDeviceSuitable(VkPhysicalDevice device);
+bool checkDeviceExtensionSupport(VkPhysicalDevice device);
+QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device);
+VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes);
+VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
+VkShaderModule createShaderModule(const std::vector<uint32_t>& code);
+uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
+bool checkValidationLayerSupport();
+
 
 
 // Struct definitions
