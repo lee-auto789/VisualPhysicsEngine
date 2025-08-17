@@ -310,13 +310,13 @@ void initVulkan() {
     // 加载着色器
     auto vertShaderCode = readFile("shader/vert.spv");
     auto fragShaderCode = readFile("shader/frag.spv");
-    cout << "顶点着色器大小: " << vertShaderCode.size() << " 字节" << endl;
-    cout << "片元着色器大小: " << fragShaderCode.size() << " 字节" << endl;
+   cout << " 顶点着色器大小: " << vertShaderCode.size() << " 字节 " << endl;
+    cout << " 片元着色器大小: " << fragShaderCode.size() << " 字节 " << endl;
 
     VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
     VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
 
-    // std::cout << "着色器模块创建成功！" << std::endl;
+    // cout << "着色器模块创建成功！" << endl;
 
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
