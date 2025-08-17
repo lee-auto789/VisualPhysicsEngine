@@ -6,10 +6,18 @@
 #include <set>
 #include <algorithm>
 #include <fstream>
+#include <windows.h>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
 using namespace std;
+
+// 设置控制台编码为UTF-8
+void setConsoleEncoding() {
+    // 设置控制台代码页为UTF-8
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+}
 
 #ifdef NDEBUG
     const bool enableValidationLayers = false;
@@ -284,12 +292,9 @@ void initVulkan() {
     // Step 6: Create Image Views (access to swap chain images)
     createImageViews();
     
-    // 加载着色器
-auto vertShaderCode = readFile("shader/vert.spv");
-auto fragShaderCode = readFile("shader/frag.spv");
-
-std::cout << "顶点着色器大小: " << vertShaderCode.size() << " 字节" << std::endl;
-std::cout << "片元着色器大小: " << fragShaderCode.size() << " 字节" << std::endl;
+    // 测试中文输出
+std::cout << "顶点着色器大小: " << 1024 << " 字节" << std::endl;
+std::cout << "片元着色器大小: " << 512 << " 字节" << std::endl;
 
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
@@ -1059,6 +1064,9 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
 
 int main() {
     try {
+        // 设置控制台编码
+        setConsoleEncoding();
+        
         initWindow();
         initVulkan();
         
