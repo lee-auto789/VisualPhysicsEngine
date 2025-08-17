@@ -30,8 +30,8 @@ const std::vector<const char*> validationLayers = {
     "VK_LAYER_KHRONOS_validation"
 };
 
-const uint32_t WIDTH = 800;
-const uint32_t HEIGHT = 600;
+const uint32_t WIDTH = 1920;
+const uint32_t HEIGHT = 1080;
 
 GLFWwindow* window;
 
@@ -840,11 +840,11 @@ void createCommandBuffer() {
 void createVertexBuffer() {
     cout << "Creating vertex buffer..." << endl;
     
-    // Triangle vertices (position + color) - smaller and centered
+    // Triangle vertices (position + color) - very large size
     Vertex vertices[] = {
-        {{0.0f, -0.3f}, {1.0f, 0.0f, 0.0f}},  // Top - Red
-        {{-0.3f, 0.3f}, {0.0f, 1.0f, 0.0f}},  // Bottom left - Green  
-        {{0.3f, 0.3f}, {0.0f, 0.0f, 1.0f}}    // Bottom right - Blue
+        {{0.0f, -0.9f}, {1.0f, 0.0f, 0.0f}},  // Top - Red
+        {{-0.9f, 0.9f}, {0.0f, 1.0f, 0.0f}},  // Bottom left - Green  
+        {{0.9f, 0.9f}, {0.0f, 0.0f, 1.0f}}    // Bottom right - Blue
     };
     
     VkDeviceSize bufferSize = sizeof(vertices);
@@ -1013,7 +1013,7 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
     renderPassInfo.renderArea.offset = {0, 0};
     renderPassInfo.renderArea.extent = swapchainExtent;
     
-    VkClearValue clearColor = {{{0.2f, 0.2f, 0.2f, 1.0f}}};
+    VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
     renderPassInfo.clearValueCount = 1;
     renderPassInfo.pClearValues = &clearColor;
     
