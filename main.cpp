@@ -183,7 +183,7 @@ std::vector<VkSemaphore> renderFinishedSemaphores;
 std::vector<VkFence> inFlightFences;
 std::vector<VkFence> imagesInFlight;
 size_t currentFrame = 0;
-const int MAX_FRAMES_IN_FLIGHT = 2;
+const int MAX_FRAMES_IN_FLIGHT = 3;
 
 VkShaderModule createShaderModule(const std::vector<char>& code) {
     VkShaderModuleCreateInfo createInfo = {};
@@ -823,7 +823,6 @@ void createCommandPool() {
 void createCommandBuffer() {
     cout << "Creating command buffers..." << endl;
     
-    const int MAX_FRAMES_IN_FLIGHT = 2;
     commandBuffers.resize(MAX_FRAMES_IN_FLIGHT);
     
     VkCommandBufferAllocateInfo allocInfo = {};
@@ -995,7 +994,7 @@ void drawFrame() {
     vkQueuePresentKHR(graphicsQueue, &presentInfo);
     
     // Advance to next frame
-    currentFrame = (currentFrame + 1) % 2;
+    currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 }
 
 void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
