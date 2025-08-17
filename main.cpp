@@ -457,6 +457,9 @@ SwapChainSupportDetails querySwapChainSupport(VkPhysicalDevice device) {
         details.presentModes.resize(presentModeCount);
         vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
     }
+    cout << "Swap chain support details queried successfully" << endl;
+    cout << "Formats: " << details.formats.size() << endl;
+    cout << "Present modes: " << details.presentModes.size() << endl;
     
     return details;
 }
