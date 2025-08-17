@@ -200,6 +200,20 @@ std::vector<char> readFile(const std::string& filename) {
     return buffer;
 }
 
+VkShaderModule createShaderModule(const std::vector<char>& code) {
+    VkShaderModuleCreateInfo createInfo = {};
+    createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    createInfo.codeSize = code.size();
+    createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
+    
+    VkShaderModule shaderModule;
+    if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+        throw std::runtime_error("着色器模块创建失败!");
+    }
+    
+    return shaderModule;
+}
+
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
     VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -297,6 +311,11 @@ void initVulkan() {
     auto fragShaderCode = readFile("shader/frag.spv");
     cout << "顶点着色器大小: " << vertShaderCode.size() << " 字节" << endl;
     cout << "片元着色器大小: " << fragShaderCode.size() << " 字节" << endl;
+
+    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
+    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
+
+    std::cout << "着色器模块创建成功！" << std::endl;
 
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
