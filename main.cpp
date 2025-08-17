@@ -719,7 +719,7 @@ void createGraphicsPipeline() {
     rasterizer.rasterizerDiscardEnable = VK_FALSE;
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
     rasterizer.lineWidth = 1.0f;
-    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+    rasterizer.cullMode = VK_CULL_MODE_NONE;
     rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
     rasterizer.depthBiasEnable = VK_FALSE;
     
@@ -840,11 +840,11 @@ void createCommandBuffer() {
 void createVertexBuffer() {
     cout << "Creating vertex buffer..." << endl;
     
-    // Triangle vertices (position + color)
+    // Triangle vertices (position + color) - smaller and centered
     Vertex vertices[] = {
-        {{0.0f, -0.8f}, {1.0f, 0.0f, 0.0f}},  // Top - Red
-        {{-0.8f, 0.8f}, {0.0f, 1.0f, 0.0f}},  // Bottom left - Green  
-        {{0.8f, 0.8f}, {0.0f, 0.0f, 1.0f}}    // Bottom right - Blue
+        {{0.0f, -0.3f}, {1.0f, 0.0f, 0.0f}},  // Top - Red
+        {{-0.3f, 0.3f}, {0.0f, 1.0f, 0.0f}},  // Bottom left - Green  
+        {{0.3f, 0.3f}, {0.0f, 0.0f, 1.0f}}    // Bottom right - Blue
     };
     
     VkDeviceSize bufferSize = sizeof(vertices);
@@ -1013,7 +1013,7 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
     renderPassInfo.renderArea.offset = {0, 0};
     renderPassInfo.renderArea.extent = swapchainExtent;
     
-    VkClearValue clearColor = {{{0.1f, 0.1f, 0.3f, 1.0f}}};
+    VkClearValue clearColor = {{{0.2f, 0.2f, 0.2f, 1.0f}}};
     renderPassInfo.clearValueCount = 1;
     renderPassInfo.pClearValues = &clearColor;
     
