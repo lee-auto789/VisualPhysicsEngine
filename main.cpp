@@ -172,6 +172,26 @@ const uint32_t shaderCode[] = {
     0x000100fd, 0x00010038
 };
 
+#include <fstream>
+
+// 读取二进制文件的函数
+std::vector<char> readFile(const std::string& filename) {
+    std::ifstream file(filename, std::ios::ate | std::ios::binary);
+    
+    if (!file.is_open()) {
+        throw std::runtime_error("打开文件失败: " + filename);
+    }
+    
+    size_t fileSize = (size_t) file.tellg();
+    std::vector<char> buffer(fileSize);
+    
+    file.seekg(0);
+    file.read(buffer.data(), fileSize);
+    file.close();
+    
+    return buffer;
+}
+
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
     VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -264,6 +284,13 @@ void initVulkan() {
     // Step 6: Create Image Views (access to swap chain images)
     createImageViews();
     
+    // 加载着色器
+auto vertShaderCode = readFile("shader/vert.spv");
+auto fragShaderCode = readFile("shader/frag.spv");
+
+std::cout << "顶点着色器大小: " << vertShaderCode.size() << " 字节" << std::endl;
+std::cout << "片元着色器大小: " << fragShaderCode.size() << " 字节" << std::endl;
+
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
     
