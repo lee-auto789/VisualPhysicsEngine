@@ -291,10 +291,12 @@ void initVulkan() {
     
     // Step 6: Create Image Views (access to swap chain images)
     createImageViews();
-    
-    // 测试中文输出
-std::cout << "顶点着色器大小: " << 1024 << " 字节" << std::endl;
-std::cout << "片元着色器大小: " << 512 << " 字节" << std::endl;
+
+    // 加载着色器
+    auto vertShaderCode = readFile("shader/vert.spv");
+    auto fragShaderCode = readFile("shader/frag.spv");
+    cout << "顶点着色器大小: " << vertShaderCode.size() << " 字节" << endl;
+    cout << "片元着色器大小: " << fragShaderCode.size() << " 字节" << endl;
 
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
