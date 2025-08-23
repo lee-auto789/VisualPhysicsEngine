@@ -8,14 +8,17 @@
 #include <fstream>
 #include <array>
 #include <windows.h>
+#include <chrono>
+#include <memory>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include "PhysicsEngine.h"
 
 using namespace std;
 
 // 设置控制台编码为UTF-8
 void setConsoleEncoding() {
-    // 设置控制台代码页为UTF-8
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
 }
@@ -69,6 +72,8 @@ void mainLoop();
 void drawFrame();
 void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 void cleanup();
+void initPhysicsObjects();
+void updateVertexBufferData();
 
 // Helper function forward declarations
 bool isDeviceSuitable(VkPhysicalDevice device);
@@ -82,11 +87,7 @@ VkShaderModule createShaderModule(const std::vector<char>& code);
 uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties);
 bool checkValidationLayerSupport();
 
-// Vertex structure
-struct Vertex {
-    float pos[2];
-    float color[3];
-};
+
 
 
 
@@ -153,7 +154,7 @@ void initWindow() {
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     
-    window = glfwCreateWindow(WIDTH, HEIGHT, "Visual Physics Engine", nullptr, nullptr);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "Visual Physics Engine - Physics Demo", nullptr, nullptr);
     if (!window) {
         throw std::runtime_error("Failed to create GLFW window!");
     }
@@ -185,6 +186,11 @@ std::vector<VkFence> imagesInFlight;
 size_t currentFrame = 0;
 const int MAX_FRAMES_IN_FLIGHT = 3;
 
+// 物理引擎相关
+std::unique_ptr<PhysicsEngine> physicsEngine;
+std::vector<std::shared_ptr<PhysicsObject>> physicsObjects;
+auto lastFrameTime = std::chrono::high_resolution_clock::now();
+
 VkShaderModule createShaderModule(const std::vector<char>& code) {
     VkShaderModuleCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
@@ -197,6 +203,89 @@ VkShaderModule createShaderModule(const std::vector<char>& code) {
     }
     
     return shaderModule;
+}
+
+void initPhysicsObjects() {
+    cout << "Initializing physics objects..." << endl;
+    
+    try {
+        physicsEngine = std::make_unique<PhysicsEngine>();
+        cout << "Physics engine created successfully" << endl;
+        
+        // Create multiple triangles with different colors
+        std::vector<std::vector<PhysicsObject::Vertex>> triangleVertices = {
+            // Red triangle
+            {
+                {{0.0f, 0.2f}, {1.0f, 0.0f, 0.0f}},
+                {{-0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}},
+                {{0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}}
+            },
+            // Green triangle
+            {
+                {{0.0f, 0.4f}, {0.0f, 1.0f, 0.0f}},
+                {{-0.1f, 0.1f}, {0.0f, 1.0f, 0.0f}},
+                {{0.1f, 0.1f}, {0.0f, 1.0f, 0.0f}}
+            },
+            // Blue triangle
+            {
+                {{0.0f, 0.6f}, {0.0f, 0.0f, 1.0f}},
+                {{-0.1f, 0.3f}, {0.0f, 0.0f, 1.0f}},
+                {{0.1f, 0.3f}, {0.0f, 0.0f, 1.0f}}
+            },
+            // Yellow triangle
+            {
+                {{0.0f, 0.8f}, {1.0f, 1.0f, 0.0f}},
+                {{-0.1f, 0.5f}, {1.0f, 1.0f, 0.0f}},
+                {{0.1f, 0.5f}, {1.0f, 1.0f, 0.0f}}
+            }
+        };
+        
+        cout << "Created " << triangleVertices.size() << " triangle vertex sets" << endl;
+        
+        // Create physics objects
+        for (size_t i = 0; i < triangleVertices.size(); i++) {
+            cout << "Creating physics object " << i << "..." << endl;
+            auto obj = std::make_shared<PhysicsObject>(triangleVertices[i], 1.0f + i * 0.5f);
+            obj->setPosition(glm::vec2(-0.5f + i * 0.3f, 0.8f));
+            obj->setVelocity(glm::vec2(0.0f, 0.0f));
+            obj->setElasticity(0.7f + i * 0.1f);
+            obj->setFriction(0.1f + i * 0.05f);
+            
+            physicsObjects.push_back(obj);
+            physicsEngine->addObject(obj);
+            cout << "Physics object " << i << " created and added" << endl;
+        }
+        
+        cout << "Created " << physicsObjects.size() << " physics objects" << endl;
+    } catch (const std::exception& e) {
+        cout << "Error initializing physics objects: " << e.what() << endl;
+    }
+}
+
+void updateVertexBufferData() {
+    if (!physicsEngine || physicsObjects.empty()) {
+        return;
+    }
+    
+    // Collect vertex data from all physics objects
+    std::vector<PhysicsObject::Vertex> allVertices;
+    
+    for (const auto& obj : physicsObjects) {
+        const auto& vertices = obj->getVertices();
+        allVertices.insert(allVertices.end(), vertices.begin(), vertices.end());
+    }
+    
+    if (allVertices.empty()) {
+        return;
+    }
+    
+    // Update vertex buffer
+    VkDeviceSize bufferSize = allVertices.size() * sizeof(PhysicsObject::Vertex);
+    
+    void* data;
+    vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
+    memcpy(data, allVertices.data(), (size_t)bufferSize);
+    vkUnmapMemory(device, vertexBufferMemory);
 }
 
 void initVulkan() {
@@ -220,21 +309,6 @@ void initVulkan() {
     // Step 6: Create Image Views (access to swap chain images)
     createImageViews();
 
-    // 加载着色器
-    auto vertShaderCode = readFile("shader/vert.spv");
-    auto fragShaderCode = readFile("shader/frag.spv");
-   cout << " 顶点着色器大小: " << vertShaderCode.size() << " 字节 " << endl;
-    cout << " 片元着色器大小: " << fragShaderCode.size() << " 字节 " << endl;
-
-    VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
-    VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
-
-    // cout << "着色器模块创建成功！" << endl;
-    
-    // 清理着色器模块
-    vkDestroyShaderModule(device, vertShaderModule, nullptr);
-    vkDestroyShaderModule(device, fragShaderModule, nullptr);
-
     // Step 7: Create Render Pass (describes render targets and operations)
     createRenderPass();
     
@@ -253,6 +327,9 @@ void initVulkan() {
     
     // Step 12: Create Synchronization Objects (semaphores and fences)
     createSyncObjects();
+    
+    // Initialize physics objects
+    initPhysicsObjects();
     
     cout << "Vulkan initialization complete!" << endl;
 }
@@ -662,7 +739,7 @@ void createGraphicsPipeline() {
     // Vertex input state
     VkVertexInputBindingDescription bindingDescription = {};
     bindingDescription.binding = 0;
-    bindingDescription.stride = sizeof(Vertex);
+    bindingDescription.stride = sizeof(PhysicsObject::Vertex);
     bindingDescription.inputRate = VK_VERTEX_INPUT_RATE_VERTEX;
 
     std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions = {};
@@ -671,13 +748,13 @@ void createGraphicsPipeline() {
     attributeDescriptions[0].binding = 0;
     attributeDescriptions[0].location = 0;
     attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
-    attributeDescriptions[0].offset = offsetof(Vertex, pos);
+    attributeDescriptions[0].offset = offsetof(PhysicsObject::Vertex, position);
     
     // Color attribute
     attributeDescriptions[1].binding = 0;
     attributeDescriptions[1].location = 1;
     attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-    attributeDescriptions[1].offset = offsetof(Vertex, color);
+    attributeDescriptions[1].offset = offsetof(PhysicsObject::Vertex, color);
 
     VkPipelineVertexInputStateCreateInfo vertexInputInfo = {};
     vertexInputInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
@@ -840,16 +917,9 @@ void createCommandBuffer() {
 void createVertexBuffer() {
     cout << "Creating vertex buffer..." << endl;
     
-    // Triangle vertices (position + color) - very large size
-    Vertex vertices[] = {
-        {{0.0f, -0.9f}, {1.0f, 0.0f, 0.0f}},  // Top - Red
-        {{-0.9f, 0.9f}, {0.0f, 1.0f, 0.0f}},  // Bottom left - Green  
-        {{0.9f, 0.9f}, {0.0f, 0.0f, 1.0f}}    // Bottom right - Blue
-    };
+    // Create large enough vertex buffer to accommodate all physics objects
+    VkDeviceSize bufferSize = 1000 * sizeof(PhysicsObject::Vertex); // Reserve space
     
-    VkDeviceSize bufferSize = sizeof(vertices);
-    
-    // Create buffer
     VkBufferCreateInfo bufferInfo = {};
     bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     bufferInfo.size = bufferSize;
@@ -860,7 +930,6 @@ void createVertexBuffer() {
         throw std::runtime_error("failed to create vertex buffer!");
     }
     
-    // Allocate memory
     VkMemoryRequirements memRequirements;
     vkGetBufferMemoryRequirements(device, vertexBuffer, &memRequirements);
     
@@ -873,15 +942,7 @@ void createVertexBuffer() {
         throw std::runtime_error("failed to allocate vertex buffer memory!");
     }
     
-    // Bind memory to buffer
     vkBindBufferMemory(device, vertexBuffer, vertexBufferMemory, 0);
-    
-    // Copy vertex data
-    void* data;
-    vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
-    memcpy(data, vertices, (size_t)bufferSize);
-    vkUnmapMemory(device, vertexBufferMemory);
-    
     cout << "Vertex buffer created successfully" << endl;
 }
 
@@ -928,21 +989,46 @@ void createSyncObjects() {
 void mainLoop() {
     cout << "Starting main loop..." << endl;
     
+    int frameCount = 0;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
+        
+        // Calculate frame time
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        float deltaTime = std::chrono::duration<float>(currentTime - lastFrameTime).count();
+        lastFrameTime = currentTime;
+        
+        // Limit frame time to avoid large time steps
+        deltaTime = std::min(deltaTime, 0.016f); // Max 16ms
+        
+        // Update physics engine
+        if (physicsEngine) {
+            physicsEngine->update(deltaTime);
+        }
+        
         drawFrame();
+        
+        frameCount++;
+        if (frameCount % 60 == 0) {
+            cout << "Frame " << frameCount << " completed" << endl;
+        }
     }
     
+    cout << "Main loop ended after " << frameCount << " frames" << endl;
     vkDeviceWaitIdle(device);
 }
 
 void drawFrame() {
-    // Wait for previous frame to finish
-    vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
-    
-    // Acquire image from swap chain
-    uint32_t imageIndex = 0;
-    vkAcquireNextImageKHR(device, swapchain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+    try {
+        // Wait for previous frame to finish
+        vkWaitForFences(device, 1, &inFlightFences[currentFrame], VK_TRUE, UINT64_MAX);
+        
+        // Acquire image from swap chain
+        uint32_t imageIndex = 0;
+        VkResult result = vkAcquireNextImageKHR(device, swapchain, UINT64_MAX, imageAvailableSemaphores[currentFrame], VK_NULL_HANDLE, &imageIndex);
+        if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR) {
+            throw std::runtime_error("Failed to acquire swap chain image!");
+        }
     
     // Check if a previous frame is using this image
     if (imagesInFlight[imageIndex] != VK_NULL_HANDLE) {
@@ -950,6 +1036,9 @@ void drawFrame() {
     }
     // Mark the image as now being in use by this frame
     imagesInFlight[imageIndex] = inFlightFences[currentFrame];
+    
+    // Update vertex buffer data
+    updateVertexBufferData();
     
     // Reset command buffer
     vkResetCommandBuffer(commandBuffers[currentFrame], 0);
@@ -993,8 +1082,12 @@ void drawFrame() {
     
     vkQueuePresentKHR(graphicsQueue, &presentInfo);
     
-    // Advance to next frame
-    currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
+        // Advance to next frame
+        currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
+    } catch (const std::exception& e) {
+        cout << "Error in drawFrame: " << e.what() << endl;
+        throw;
+    }
 }
 
 void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
@@ -1027,8 +1120,18 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
     VkDeviceSize offsets[] = {0};
     vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
     
-    // Draw triangle
-    vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+    // Render all physics objects
+    if (!physicsObjects.empty()) {
+        // Calculate total vertices
+        uint32_t totalVertices = 0;
+        for (const auto& obj : physicsObjects) {
+            totalVertices += static_cast<uint32_t>(obj->getVertices().size());
+        }
+        
+        if (totalVertices > 0) {
+            vkCmdDraw(commandBuffer, totalVertices, 1, 0, 0);
+        }
+    }
     
     // End render pass
     vkCmdEndRenderPass(commandBuffer);

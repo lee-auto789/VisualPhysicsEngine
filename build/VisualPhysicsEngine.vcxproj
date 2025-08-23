@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/VulkanSDK/1.4.321.1/Include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -106,10 +106,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -132,7 +132,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/VulkanSDK/1.4.321.1/Include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -152,10 +152,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -178,7 +178,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/VulkanSDK/1.4.321.1/Include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -198,10 +198,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -224,7 +224,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /external:I "C:/VulkanSDK/1.4.321.1/Include"</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -243,10 +243,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Intelligent\VisualPhysicsEngine\external\glfw-3.3.8.bin.WIN64\include;D:\Intelligent\VisualPhysicsEngine\external\glm;C:\VulkanSDK\1.4.321.1\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -330,6 +330,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\Intelligent\VisualPhysicsEngine\main.cpp" />
+    <ClCompile Include="D:\Intelligent\VisualPhysicsEngine\PhysicsEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Intelligent\VisualPhysicsEngine\build\ZERO_CHECK.vcxproj">

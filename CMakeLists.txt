@@ -16,11 +16,29 @@ set(GLFW_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/glfw-3.3.8.bin.WIN64")
 set(GLFW_INCLUDE_DIRS "${GLFW_DIR}/include")
 set(GLFW_LIBRARIES "${GLFW_DIR}/lib-vc2022/glfw3.lib")
 
-# Create executable
-add_executable(${PROJECT_NAME} main.cpp)
+# Add GLM (OpenGL Mathematics)
+# You can download GLM from https://github.com/g-truc/glm
+# For now, we'll assume GLM is in a local directory
+set(GLM_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external/glm")
+if(EXISTS "${GLM_DIR}")
+    set(GLM_INCLUDE_DIRS "${GLM_DIR}")
+else()
+    # If GLM is not found locally, you can use vcpkg or download it
+    message(WARNING "GLM not found in external/glm. Please download GLM or install via vcpkg.")
+    # For vcpkg: find_package(glm CONFIG REQUIRED)
+endif()
 
-# Include GLFW headers
-target_include_directories(${PROJECT_NAME} PRIVATE ${GLFW_INCLUDE_DIRS})
+# Create executable
+add_executable(${PROJECT_NAME} 
+    main.cpp 
+    PhysicsEngine.cpp
+)
+
+# Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE 
+    ${GLFW_INCLUDE_DIRS}
+    ${GLM_INCLUDE_DIRS}
+)
 
 # Link libraries
 target_link_libraries(${PROJECT_NAME} 

@@ -4,6 +4,9 @@
     <ClCompile Include="D:\Intelligent\VisualPhysicsEngine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Intelligent\VisualPhysicsEngine\PhysicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\Intelligent\VisualPhysicsEngine\CMakeLists.txt" />
