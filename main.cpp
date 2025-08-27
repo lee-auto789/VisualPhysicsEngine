@@ -206,60 +206,13 @@ VkShaderModule createShaderModule(const std::vector<char>& code) {
     return shaderModule;
 }
 
-void initPhysicsObjects() {
-    cout << "Initializing physics objects..." << endl;
-    
-    try {
-        physicsEngine = std::make_unique<PhysicsEngine>();
-        cout << "Physics engine created successfully" << endl;
-        
-        // Create multiple triangles with different colors
-        std::vector<std::vector<PhysicsObject::Vertex>> triangleVertices = {
-            // Red triangle
-            {
-                {{0.0f, 0.2f}, {1.0f, 0.0f, 0.0f}},
-                {{-0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}},
-                {{0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}}
-            },
-            // Green triangle
-            {
-                {{0.0f, 0.4f}, {0.0f, 1.0f, 0.0f}},
-                {{-0.1f, 0.1f}, {0.0f, 1.0f, 0.0f}},
-                {{0.1f, 0.1f}, {0.0f, 1.0f, 0.0f}}
-            },
-            // Blue triangle
-            {
-                {{0.0f, 0.6f}, {0.0f, 0.0f, 1.0f}},
-                {{-0.1f, 0.3f}, {0.0f, 0.0f, 1.0f}},
-                {{0.1f, 0.3f}, {0.0f, 0.0f, 1.0f}}
-            },
-            // Yellow triangle
-            {
-                {{0.0f, 0.8f}, {1.0f, 1.0f, 0.0f}},
-                {{-0.1f, 0.5f}, {1.0f, 1.0f, 0.0f}},
-                {{0.1f, 0.5f}, {1.0f, 1.0f, 0.0f}}
-            }
-        };
-        
-        cout << "Created " << triangleVertices.size() << " triangle vertex sets" << endl;
-        
-        // Create physics objects
-        for (size_t i = 0; i < triangleVertices.size(); i++) {
-            cout << "Creating physics object " << i << "..." << endl;
-            auto obj = std::make_shared<PhysicsObject>(triangleVertices[i], 1.0f + i * 0.5f);
-            obj->setPosition(glm::vec2(-0.5f + i * 0.3f, 0.8f));
-            obj->setVelocity(glm::vec2(0.0f, 0.0f));
-            obj->setElasticity(0.7f + i * 0.1f);
-            obj->setFriction(0.1f + i * 0.05f);
-            
-            physicsObjects.push_back(obj);
-            physicsEngine->addObject(obj);
-            cout << "Physics object " << i << " created and added" << endl;
-        }
-        
-        cout << "Created " << physicsObjects.size() << " physics objects" << endl;
-    } catch (const std::exception& e) {
-        cout << "Error initializing physics objects: " << e.what() << endl;
+#include "Scenes.h"
+
+void loadScene(Scene& scene) {
+    physicsEngine = std::make_unique<PhysicsEngine>();
+    for (const auto& obj : scene.getObjects()) {
+        physicsObjects.push_back(obj);
+        physicsEngine->addObject(obj);
     }
 }
 
@@ -303,9 +256,6 @@ void initVulkan() {
     
     // Step 12: Create Synchronization Objects (semaphores and fences)
     createSyncObjects();
-    
-    // Initialize physics objects
-    initPhysicsObjects();
     
     cout << "Vulkan initialization complete!" << endl;
 }
@@ -1113,6 +1063,10 @@ int main() {
         initWindow();
         initVulkan();
         
+        // Create and load a scene
+        MultipleTrianglesScene scene;
+        loadScene(scene);
+
         // Start the main rendering loop
         mainLoop();
         

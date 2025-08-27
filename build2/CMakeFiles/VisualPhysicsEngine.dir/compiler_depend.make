@@ -306,6 +306,8 @@ CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o: /app/main.cpp \
   /app/PhysicsEngine.h \
   /app/PhysicsObject.h \
   /app/Renderer.h \
+  /app/Scene.h \
+  /app/Scenes.h \
   /app/external/glm/glm/detail/type_mat2x3.hpp \
   /app/external/glm/glm/detail/type_mat2x3.inl \
   /app/external/glm/glm/detail/type_mat2x4.hpp \
@@ -755,8 +757,6 @@ CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o: /app/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
@@ -818,10 +818,6 @@ CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o: /app/main.cpp \
 /usr/include/c++/13/cstdlib:
 
 /usr/include/c++/13/cstdio:
-
-/usr/include/c++/13/system_error:
-
-/usr/include/c++/13/compare:
 
 /usr/include/c++/13/clocale:
 
@@ -908,6 +904,16 @@ CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o: /app/main.cpp \
 /usr/include/KHR/khrplatform.h:
 
 /usr/include/GL/glext.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
+
+/app/Scenes.h:
+
+/usr/include/c++/13/system_error:
+
+/usr/include/c++/13/compare:
+
+/app/Scene.h:
 
 /app/PhysicsEngine.h:
 

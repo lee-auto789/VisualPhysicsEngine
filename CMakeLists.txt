@@ -30,6 +30,9 @@ endif()
 add_library(Physics STATIC
     PhysicsEngine.cpp
     PhysicsObject.cpp
+    Scene.cpp
+    Scenes.cpp
+    TestRunner.cpp
 )
 
 # Create executable

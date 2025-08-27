@@ -4,6 +4,7 @@
 CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /app/PhysicsEngine.h \
   /app/PhysicsObject.h \
+  /app/TestRunner.h \
   /app/external/glm/glm/detail/type_mat2x3.hpp \
   /app/external/glm/glm/detail/type_mat2x3.inl \
   /app/external/glm/glm/detail/type_mat2x4.hpp \
@@ -148,9 +149,11 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
+  /usr/include/c++/13/array \
   /usr/include/c++/13/backward/auto_ptr.h \
   /usr/include/c++/13/backward/binders.h \
   /usr/include/c++/13/bit \
+  /usr/include/c++/13/bits/algorithmfwd.h \
   /usr/include/c++/13/bits/align.h \
   /usr/include/c++/13/bits/alloc_traits.h \
   /usr/include/c++/13/bits/allocated_ptr.h \
@@ -168,12 +171,16 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/bits/cpp_type_traits.h \
   /usr/include/c++/13/bits/cxxabi_forced.h \
   /usr/include/c++/13/bits/cxxabi_init_exception.h \
+  /usr/include/c++/13/bits/enable_special_members.h \
+  /usr/include/c++/13/bits/erase_if.h \
   /usr/include/c++/13/bits/exception.h \
   /usr/include/c++/13/bits/exception_defines.h \
   /usr/include/c++/13/bits/exception_ptr.h \
   /usr/include/c++/13/bits/functexcept.h \
   /usr/include/c++/13/bits/functional_hash.h \
   /usr/include/c++/13/bits/hash_bytes.h \
+  /usr/include/c++/13/bits/hashtable.h \
+  /usr/include/c++/13/bits/hashtable_policy.h \
   /usr/include/c++/13/bits/invoke.h \
   /usr/include/c++/13/bits/ios_base.h \
   /usr/include/c++/13/bits/istream.tcc \
@@ -187,6 +194,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/bits/move.h \
   /usr/include/c++/13/bits/nested_exception.h \
   /usr/include/c++/13/bits/new_allocator.h \
+  /usr/include/c++/13/bits/node_handle.h \
   /usr/include/c++/13/bits/ostream.tcc \
   /usr/include/c++/13/bits/ostream_insert.h \
   /usr/include/c++/13/bits/parse_numbers.h \
@@ -201,10 +209,13 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/bits/shared_ptr_base.h \
   /usr/include/c++/13/bits/specfun.h \
   /usr/include/c++/13/bits/std_abs.h \
+  /usr/include/c++/13/bits/std_function.h \
+  /usr/include/c++/13/bits/stl_algo.h \
   /usr/include/c++/13/bits/stl_algobase.h \
   /usr/include/c++/13/bits/stl_bvector.h \
   /usr/include/c++/13/bits/stl_construct.h \
   /usr/include/c++/13/bits/stl_function.h \
+  /usr/include/c++/13/bits/stl_heap.h \
   /usr/include/c++/13/bits/stl_iterator.h \
   /usr/include/c++/13/bits/stl_iterator_base_funcs.h \
   /usr/include/c++/13/bits/stl_iterator_base_types.h \
@@ -217,7 +228,9 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/bits/streambuf_iterator.h \
   /usr/include/c++/13/bits/string_view.tcc \
   /usr/include/c++/13/bits/stringfwd.h \
+  /usr/include/c++/13/bits/uniform_int_dist.h \
   /usr/include/c++/13/bits/unique_ptr.h \
+  /usr/include/c++/13/bits/unordered_map.h \
   /usr/include/c++/13/bits/uses_allocator.h \
   /usr/include/c++/13/bits/uses_allocator_args.h \
   /usr/include/c++/13/bits/utility.h \
@@ -230,6 +243,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/climits \
   /usr/include/c++/13/clocale \
   /usr/include/c++/13/cmath \
+  /usr/include/c++/13/compare \
   /usr/include/c++/13/cstddef \
   /usr/include/c++/13/cstdint \
   /usr/include/c++/13/cstdio \
@@ -247,6 +261,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/ext/numeric_traits.h \
   /usr/include/c++/13/ext/string_conversions.h \
   /usr/include/c++/13/ext/type_traits.h \
+  /usr/include/c++/13/functional \
   /usr/include/c++/13/initializer_list \
   /usr/include/c++/13/ios \
   /usr/include/c++/13/iosfwd \
@@ -280,6 +295,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
   /usr/include/c++/13/tuple \
   /usr/include/c++/13/type_traits \
   /usr/include/c++/13/typeinfo \
+  /usr/include/c++/13/unordered_map \
   /usr/include/c++/13/vector \
   /usr/include/ctype.h \
   /usr/include/endian.h \
@@ -419,8 +435,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
 /usr/include/x86_64-linux-gnu/c++/13/bits/gthr.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/ctype_base.h:
@@ -446,8 +460,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
@@ -486,8 +498,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
 /usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
 
@@ -571,7 +581,31 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/tr1/beta_function.tcc:
 
-/app/external/glm/glm/detail/type_half.inl:
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/13/string_view:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+
+/usr/include/c++/13/string:
+
+/usr/include/c++/13/stdexcept:
+
+/usr/include/c++/13/pstl/pstl_config.h:
+
+/usr/include/c++/13/ostream:
+
+/usr/include/c++/13/new:
+
+/usr/include/c++/13/memory:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/c++/13/limits:
+
+/usr/include/c++/13/istream:
+
+/usr/include/c++/13/iostream:
 
 /usr/include/c++/13/bits/stl_tempbuf.h:
 
@@ -587,6 +621,8 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/vector_int4_sized.hpp:
 
+/usr/include/c++/13/bits/stl_heap.h:
+
 /app/external/glm/glm/ext/vector_int3_sized.hpp:
 
 /app/external/glm/glm/ext/vector_float2.hpp:
@@ -599,11 +635,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/vector_double2_precision.hpp:
 
-/usr/include/c++/13/stdexcept:
-
 /app/external/glm/glm/simd/platform.h:
-
-/app/external/glm/glm/ext/matrix_float3x3_precision.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/local_lim.h:
 
@@ -619,8 +651,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/matrix_double2x3.hpp:
 
-/usr/include/c++/13/memory:
-
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
 /usr/include/vulkan/vk_platform.h:
@@ -630,6 +660,8 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
 /app/external/glm/glm/exponential.hpp:
+
+/app/TestRunner.h:
 
 /app/external/glm/glm/ext/matrix_float2x2_precision.hpp:
 
@@ -663,9 +695,7 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/vector_double4_precision.hpp:
 
-/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
-
-/usr/include/c++/13/bits/char_traits.h:
+/usr/include/c++/13/bits/hashtable_policy.h:
 
 /app/external/glm/glm/mat4x4.hpp:
 
@@ -697,14 +727,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/detail/func_exponential.inl:
 
-/app/external/glm/glm/ext/vector_uint3_sized.hpp:
-
-/app/external/glm/glm/detail/type_half.hpp:
-
-/app/external/glm/glm/ext/matrix_double3x4_precision.hpp:
-
-/app/external/glm/glm/geometric.hpp:
-
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /app/external/glm/glm/ext/matrix_double4x2_precision.hpp:
@@ -714,6 +736,10 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /app/external/glm/glm/detail/type_mat2x2.inl:
 
 /app/external/glm/glm/detail/type_vec4.hpp:
+
+/app/external/glm/glm/geometric.hpp:
+
+/app/external/glm/glm/ext/matrix_double3x4_precision.hpp:
 
 /app/external/glm/glm/ext/matrix_double3x2_precision.hpp:
 
@@ -737,10 +763,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/vector_int2_sized.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/long-double.h:
-
-/app/external/glm/glm/detail/func_trigonometric.inl:
-
 /app/external/glm/glm/ext/matrix_double4x2.hpp:
 
 /app/PhysicsObject.h:
@@ -752,6 +774,18 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /app/external/glm/glm/detail/type_mat4x2.hpp:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+
+/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
+
+/app/external/glm/glm/ext/matrix_double2x2_precision.hpp:
+
+/usr/include/c++/13/bits/exception_ptr.h:
+
+/usr/include/c++/13/bits/istream.tcc:
+
+/app/external/glm/glm/detail/type_mat3x4.inl:
 
 /app/main_test.cpp:
 
@@ -769,9 +803,21 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/detail/type_mat3x4.hpp:
 
+/usr/include/x86_64-linux-gnu/bits/long-double.h:
+
+/app/external/glm/glm/detail/func_trigonometric.inl:
+
+/usr/include/c++/13/bits/algorithmfwd.h:
+
 /usr/include/x86_64-linux-gnu/bits/xopen_lim.h:
 
 /app/external/glm/glm/detail/type_mat2x3.hpp:
+
+/usr/include/c++/13/streambuf:
+
+/usr/include/c++/13/bits/memory_resource.h:
+
+/usr/include/c++/13/array:
 
 /app/external/glm/glm/ext/matrix_float4x3_precision.hpp:
 
@@ -780,8 +826,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /app/external/glm/glm/ext/vector_int3.hpp:
 
 /app/external/glm/glm/ext/matrix_float2x4.hpp:
-
-/usr/include/c++/13/iostream:
 
 /app/external/glm/glm/detail/func_geometric.inl:
 
@@ -792,8 +836,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /app/external/glm/glm/detail/type_mat4x4.hpp:
 
 /usr/include/c++/13/bits/streambuf_iterator.h:
-
-/usr/include/c++/13/ostream:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -827,6 +869,12 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/stl_iterator_base_types.h:
 
+/usr/include/linux/limits.h:
+
+/usr/include/c++/13/ratio:
+
+/app/external/glm/glm/detail/type_mat3x2.inl:
+
 /app/external/glm/glm/ext/matrix_double2x4.hpp:
 
 /app/external/glm/glm/ext/matrix_float2x4_precision.hpp:
@@ -845,17 +893,9 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/uses_allocator.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
+/app/external/glm/glm/ext/vector_uint3_sized.hpp:
 
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
-/app/external/glm/glm/ext/matrix_double2x2_precision.hpp:
-
-/usr/include/c++/13/bits/exception_ptr.h:
-
-/usr/include/c++/13/bits/istream.tcc:
-
-/app/external/glm/glm/detail/type_mat3x4.inl:
+/app/external/glm/glm/detail/type_half.hpp:
 
 /app/external/glm/glm/ext/matrix_float4x2.hpp:
 
@@ -864,12 +904,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
 /usr/include/c++/13/ext/atomicity.h:
-
-/usr/include/vk_video/vulkan_video_codec_h264std.h:
-
-/app/external/glm/glm/ext/vector_double4.hpp:
-
-/app/external/glm/glm/detail/type_mat3x3.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
@@ -931,7 +965,17 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/matrix_double2x3_precision.hpp:
 
+/usr/include/c++/13/pstl/execution_defs.h:
+
+/app/external/glm/glm/detail/setup.hpp:
+
 /app/external/glm/glm/mat4x3.hpp:
+
+/usr/include/x86_64-linux-gnu/c++/13/bits/ctype_inline.h:
+
+/usr/include/c++/13/bits/char_traits.h:
+
+/usr/include/c++/13/bits/std_function.h:
 
 /usr/include/c++/13/cstdint:
 
@@ -969,9 +1013,19 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /app/external/glm/glm/ext/matrix_double4x4.hpp:
 
+/usr/include/vk_video/vulkan_video_codec_h264std.h:
+
+/app/external/glm/glm/ext/vector_double4.hpp:
+
+/app/external/glm/glm/detail/type_mat3x3.hpp:
+
+/usr/include/c++/13/functional:
+
 /app/external/glm/glm/detail/_fixes.hpp:
 
 /usr/include/c++/13/chrono:
+
+/app/external/glm/glm/detail/type_half.inl:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
@@ -986,10 +1040,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /app/external/glm/glm/ext/vector_float3_precision.hpp:
 
 /app/external/glm/glm/vec2.hpp:
-
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/usr/include/c++/13/limits:
 
 /app/external/glm/glm/vec4.hpp:
 
@@ -1031,6 +1081,8 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/clocale:
 
+/usr/include/c++/13/unordered_map:
+
 /usr/include/c++/13/bits/allocator.h:
 
 /usr/include/c++/13/bits/stl_bvector.h:
@@ -1045,10 +1097,6 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/basic_ios.tcc:
 
-/app/external/glm/glm/detail/setup.hpp:
-
-/usr/include/c++/13/pstl/execution_defs.h:
-
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
 /usr/include/c++/13/bits/chrono.h:
@@ -1059,13 +1107,17 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
 
+/usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/c++/13/bits/enable_special_members.h:
+
+/usr/include/c++/13/bits/erase_if.h:
+
+/usr/include/c++/13/bits/shared_ptr_atomic.h:
+
 /app/external/glm/glm/vec3.hpp:
 
 /usr/include/c++/13/bits/exception.h:
-
-/usr/include/c++/13/bits/memory_resource.h:
-
-/usr/include/c++/13/streambuf:
 
 /usr/include/vk_video/vulkan_video_codec_h265std.h:
 
@@ -1081,9 +1133,15 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/functional_hash.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/c++/13/bits/hashtable.h:
+
 /usr/include/c++/13/bits/invoke.h:
 
 /app/external/glm/glm/detail/type_mat2x3.inl:
+
+/usr/include/c++/13/bits/uniform_int_dist.h:
 
 /usr/include/c++/13/bits/locale_classes.tcc:
 
@@ -1093,9 +1151,9 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/tuple:
 
-/usr/include/c++/13/bits/nested_exception.h:
-
 /app/external/glm/glm/ext/matrix_double2x4_precision.hpp:
+
+/usr/include/c++/13/bits/nested_exception.h:
 
 /usr/include/c++/13/cfloat:
 
@@ -1109,6 +1167,10 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/move.h:
 
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/include/c++/13/bits/node_handle.h:
+
 /usr/include/c++/13/bits/predefined_ops.h:
 
 /usr/include/c++/13/iosfwd:
@@ -1117,15 +1179,15 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/range_access.h:
 
-/usr/include/c++/13/system_error:
-
 /usr/include/c++/13/bits/refwrap.h:
-
-/usr/include/c++/13/bits/shared_ptr_atomic.h:
 
 /usr/include/wchar.h:
 
 /usr/include/c++/13/bits/shared_ptr_base.h:
+
+/usr/include/c++/13/bits/stl_algo.h:
+
+/usr/include/c++/13/cstddef:
 
 /usr/include/c++/13/bits/stl_algobase.h:
 
@@ -1155,21 +1217,21 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/bits/string_view.tcc:
 
+/app/external/glm/glm/ext/matrix_float3x3_precision.hpp:
+
+/usr/include/c++/13/bits/unordered_map.h:
+
 /usr/include/c++/13/bits/vector.tcc:
 
 /usr/include/c++/13/cerrno:
 
 /usr/include/c++/13/cmath:
 
-/usr/include/c++/13/cstddef:
+/usr/include/c++/13/system_error:
+
+/usr/include/c++/13/compare:
 
 /usr/include/c++/13/cwctype:
-
-/usr/include/linux/limits.h:
-
-/app/external/glm/glm/detail/type_mat3x2.inl:
-
-/usr/include/c++/13/ratio:
 
 /usr/include/c++/13/debug/assertions.h:
 
@@ -1177,11 +1239,13 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 
 /usr/include/c++/13/debug/debug.h:
 
+/usr/include/c++/13/pstl/glue_memory_defs.h:
+
+/usr/include/c++/13/exception:
+
 /usr/include/c++/13/ext/aligned_buffer.h:
 
 /usr/include/c++/13/ext/alloc_traits.h:
-
-/usr/include/c++/13/new:
 
 /usr/include/vk_video/vulkan_video_codecs_common.h:
 
@@ -1196,19 +1260,3 @@ CMakeFiles/PhysicsTest.dir/main_test.cpp.o: /app/main_test.cpp \
 /app/external/glm/glm/packing.hpp:
 
 /usr/include/c++/13/initializer_list:
-
-/usr/include/c++/13/istream:
-
-/usr/include/c++/13/exception:
-
-/usr/include/c++/13/pstl/glue_memory_defs.h:
-
-/usr/include/c++/13/pstl/pstl_config.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/c++/13/string:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/c++/13/string_view:

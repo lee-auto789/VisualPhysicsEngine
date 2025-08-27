@@ -97,19 +97,67 @@ CMakeFiles/Physics.dir/PhysicsObject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/PhysicsObject.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /app/PhysicsObject.cpp -o CMakeFiles/Physics.dir/PhysicsObject.cpp.s
 
+CMakeFiles/Physics.dir/Scene.cpp.o: CMakeFiles/Physics.dir/flags.make
+CMakeFiles/Physics.dir/Scene.cpp.o: /app/Scene.cpp
+CMakeFiles/Physics.dir/Scene.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/app/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Physics.dir/Scene.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/Scene.cpp.o -MF CMakeFiles/Physics.dir/Scene.cpp.o.d -o CMakeFiles/Physics.dir/Scene.cpp.o -c /app/Scene.cpp
+
+CMakeFiles/Physics.dir/Scene.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Physics.dir/Scene.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /app/Scene.cpp > CMakeFiles/Physics.dir/Scene.cpp.i
+
+CMakeFiles/Physics.dir/Scene.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/Scene.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /app/Scene.cpp -o CMakeFiles/Physics.dir/Scene.cpp.s
+
+CMakeFiles/Physics.dir/Scenes.cpp.o: CMakeFiles/Physics.dir/flags.make
+CMakeFiles/Physics.dir/Scenes.cpp.o: /app/Scenes.cpp
+CMakeFiles/Physics.dir/Scenes.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/app/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Physics.dir/Scenes.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/Scenes.cpp.o -MF CMakeFiles/Physics.dir/Scenes.cpp.o.d -o CMakeFiles/Physics.dir/Scenes.cpp.o -c /app/Scenes.cpp
+
+CMakeFiles/Physics.dir/Scenes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Physics.dir/Scenes.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /app/Scenes.cpp > CMakeFiles/Physics.dir/Scenes.cpp.i
+
+CMakeFiles/Physics.dir/Scenes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/Scenes.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /app/Scenes.cpp -o CMakeFiles/Physics.dir/Scenes.cpp.s
+
+CMakeFiles/Physics.dir/TestRunner.cpp.o: CMakeFiles/Physics.dir/flags.make
+CMakeFiles/Physics.dir/TestRunner.cpp.o: /app/TestRunner.cpp
+CMakeFiles/Physics.dir/TestRunner.cpp.o: CMakeFiles/Physics.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/app/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Physics.dir/TestRunner.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Physics.dir/TestRunner.cpp.o -MF CMakeFiles/Physics.dir/TestRunner.cpp.o.d -o CMakeFiles/Physics.dir/TestRunner.cpp.o -c /app/TestRunner.cpp
+
+CMakeFiles/Physics.dir/TestRunner.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Physics.dir/TestRunner.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /app/TestRunner.cpp > CMakeFiles/Physics.dir/TestRunner.cpp.i
+
+CMakeFiles/Physics.dir/TestRunner.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Physics.dir/TestRunner.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /app/TestRunner.cpp -o CMakeFiles/Physics.dir/TestRunner.cpp.s
+
 # Object files for target Physics
 Physics_OBJECTS = \
 "CMakeFiles/Physics.dir/PhysicsEngine.cpp.o" \
-"CMakeFiles/Physics.dir/PhysicsObject.cpp.o"
+"CMakeFiles/Physics.dir/PhysicsObject.cpp.o" \
+"CMakeFiles/Physics.dir/Scene.cpp.o" \
+"CMakeFiles/Physics.dir/Scenes.cpp.o" \
+"CMakeFiles/Physics.dir/TestRunner.cpp.o"
 
 # External object files for target Physics
 Physics_EXTERNAL_OBJECTS =
 
 libPhysics.a: CMakeFiles/Physics.dir/PhysicsEngine.cpp.o
 libPhysics.a: CMakeFiles/Physics.dir/PhysicsObject.cpp.o
+libPhysics.a: CMakeFiles/Physics.dir/Scene.cpp.o
+libPhysics.a: CMakeFiles/Physics.dir/Scenes.cpp.o
+libPhysics.a: CMakeFiles/Physics.dir/TestRunner.cpp.o
 libPhysics.a: CMakeFiles/Physics.dir/build.make
 libPhysics.a: CMakeFiles/Physics.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/app/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libPhysics.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/app/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libPhysics.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/Physics.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Physics.dir/link.txt --verbose=$(VERBOSE)
 

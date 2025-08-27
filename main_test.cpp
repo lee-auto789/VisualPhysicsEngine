@@ -106,9 +106,54 @@ void runPhysicsTests() {
     cout << "==========================" << endl;
 }
 
+#include "TestRunner.h"
+#include <cassert>
+
+void testAddRemoveObject() {
+    PhysicsEngine engine;
+    auto obj = std::make_shared<PhysicsObject>(std::vector<PhysicsObject::Vertex>{});
+    engine.addObject(obj);
+    assert(engine.getObjects().size() == 1);
+    engine.removeObject(obj);
+    assert(engine.getObjects().empty());
+}
+
+void testCollision() {
+    PhysicsEngine engine;
+    std::vector<PhysicsObject::Vertex> vertices = {
+        {{0.0f, 0.1f}, {1.0f, 0.0f, 0.0f}},
+        {{-0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}},
+        {{0.1f, -0.1f}, {1.0f, 0.0f, 0.0f}}
+    };
+    auto obj1 = std::make_shared<PhysicsObject>(vertices);
+    auto obj2 = std::make_shared<PhysicsObject>(vertices);
+    engine.addObject(obj1);
+    engine.addObject(obj2);
+
+    // Test no collision
+    obj1->setPosition(glm::vec2(0.0f, 0.0f));
+    obj2->setPosition(glm::vec2(1.0f, 1.0f));
+    engine.update(0.016f);
+    obj1->setVelocity(glm::vec2(0.0f, 0.0f));
+    obj2->setVelocity(glm::vec2(0.0f, 0.0f));
+    assert(obj1->getVelocity() == glm::vec2(0.0f, 0.0f));
+    assert(obj2->getVelocity() == glm::vec2(0.0f, 0.0f));
+
+    // Test collision
+    obj2->setPosition(glm::vec2(0.05f, 0.05f));
+    engine.update(0.016f);
+    assert(obj1->getVelocity() != glm::vec2(0.0f, 0.0f));
+    assert(obj2->getVelocity() != glm::vec2(0.0f, 0.0f));
+}
+
 int main() {
+    TestRunner runner;
+    runner.addTest("testAddRemoveObject", testAddRemoveObject);
+    runner.addTest("testCollision", testCollision);
+
     try {
         runPhysicsTests();
+        runner.runTests();
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
         return EXIT_FAILURE;

@@ -23,6 +23,7 @@ public:
     
     // Collision detection and response
     void checkCollisions();
+    const std::vector<std::shared_ptr<PhysicsObject>>& getObjects() const;
     
 
 private:

@@ -71,3 +71,6 @@ void PhysicsEngine::applyAirResistance(std::shared_ptr<PhysicsObject> obj) {
     obj->applyForce(resistance);
 }
 
+const std::vector<std::shared_ptr<PhysicsObject>>& PhysicsEngine::getObjects() const {
+    return objects;
+}

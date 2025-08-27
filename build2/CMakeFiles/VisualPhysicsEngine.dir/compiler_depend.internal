@@ -308,6 +308,8 @@ CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o
  /app/PhysicsEngine.h
  /app/PhysicsObject.h
  /app/Renderer.h
+ /app/Scene.h
+ /app/Scenes.h
  /app/external/glm/glm/detail/type_mat2x3.hpp
  /app/external/glm/glm/detail/type_mat2x3.inl
  /app/external/glm/glm/detail/type_mat2x4.hpp

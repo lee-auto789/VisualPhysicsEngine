@@ -227,6 +227,78 @@ Renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/VisualPhysicsEngine.dir/build.make CMakeFiles/VisualPhysicsEngine.dir/Renderer.cpp.s
 .PHONY : Renderer.cpp.s
 
+Scene.o: Scene.cpp.o
+.PHONY : Scene.o
+
+# target to build an object file
+Scene.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scene.cpp.o
+.PHONY : Scene.cpp.o
+
+Scene.i: Scene.cpp.i
+.PHONY : Scene.i
+
+# target to preprocess a source file
+Scene.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scene.cpp.i
+.PHONY : Scene.cpp.i
+
+Scene.s: Scene.cpp.s
+.PHONY : Scene.s
+
+# target to generate assembly for a file
+Scene.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scene.cpp.s
+.PHONY : Scene.cpp.s
+
+Scenes.o: Scenes.cpp.o
+.PHONY : Scenes.o
+
+# target to build an object file
+Scenes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scenes.cpp.o
+.PHONY : Scenes.cpp.o
+
+Scenes.i: Scenes.cpp.i
+.PHONY : Scenes.i
+
+# target to preprocess a source file
+Scenes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scenes.cpp.i
+.PHONY : Scenes.cpp.i
+
+Scenes.s: Scenes.cpp.s
+.PHONY : Scenes.s
+
+# target to generate assembly for a file
+Scenes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/Scenes.cpp.s
+.PHONY : Scenes.cpp.s
+
+TestRunner.o: TestRunner.cpp.o
+.PHONY : TestRunner.o
+
+# target to build an object file
+TestRunner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/TestRunner.cpp.o
+.PHONY : TestRunner.cpp.o
+
+TestRunner.i: TestRunner.cpp.i
+.PHONY : TestRunner.i
+
+# target to preprocess a source file
+TestRunner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/TestRunner.cpp.i
+.PHONY : TestRunner.cpp.i
+
+TestRunner.s: TestRunner.cpp.s
+.PHONY : TestRunner.s
+
+# target to generate assembly for a file
+TestRunner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Physics.dir/build.make CMakeFiles/Physics.dir/TestRunner.cpp.s
+.PHONY : TestRunner.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -295,6 +367,15 @@ help:
 	@echo "... Renderer.o"
 	@echo "... Renderer.i"
 	@echo "... Renderer.s"
+	@echo "... Scene.o"
+	@echo "... Scene.i"
+	@echo "... Scene.s"
+	@echo "... Scenes.o"
+	@echo "... Scenes.i"
+	@echo "... Scenes.s"
+	@echo "... TestRunner.o"
+	@echo "... TestRunner.i"
+	@echo "... TestRunner.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
