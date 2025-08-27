@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/VisualPhysicsEngine.dir/main.cpp.o CMakeFiles/VisualPhysicsEngine.dir/Renderer.cpp.o -o VisualPhysicsEngine  /usr/lib/x86_64-linux-gnu/libvulkan.so /usr/lib/x86_64-linux-gnu/libglfw.so.3.3 libPhysics.a

@@ -1,0 +1,5 @@
+/app/build2/CMakeFiles/Physics.dir
+/app/build2/CMakeFiles/VisualPhysicsEngine.dir
+/app/build2/CMakeFiles/PhysicsTest.dir
+/app/build2/CMakeFiles/edit_cache.dir
+/app/build2/CMakeFiles/rebuild_cache.dir

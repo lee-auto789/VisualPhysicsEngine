@@ -7,21 +7,22 @@
 #include <algorithm>
 #include <fstream>
 #include <array>
-#include <windows.h>
+// #include <windows.h>
 #include <chrono>
 #include <memory>
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include "PhysicsEngine.h"
+#include "Renderer.h"
 
 using namespace std;
 
-// 设置控制台编码为UTF-8
-void setConsoleEncoding() {
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-}
+// // 设置控制台编码为UTF-8
+// void setConsoleEncoding() {
+//     SetConsoleOutputCP(CP_UTF8);
+//     SetConsoleCP(CP_UTF8);
+// }
 
 #ifdef NDEBUG
     const bool enableValidationLayers = false;
@@ -73,7 +74,6 @@ void drawFrame();
 void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 void cleanup();
 void initPhysicsObjects();
-void updateVertexBufferData();
 
 // Helper function forward declarations
 bool isDeviceSuitable(VkPhysicalDevice device);
@@ -190,6 +190,7 @@ const int MAX_FRAMES_IN_FLIGHT = 3;
 std::unique_ptr<PhysicsEngine> physicsEngine;
 std::vector<std::shared_ptr<PhysicsObject>> physicsObjects;
 auto lastFrameTime = std::chrono::high_resolution_clock::now();
+Renderer renderer;
 
 VkShaderModule createShaderModule(const std::vector<char>& code) {
     VkShaderModuleCreateInfo createInfo = {};
@@ -262,31 +263,6 @@ void initPhysicsObjects() {
     }
 }
 
-void updateVertexBufferData() {
-    if (!physicsEngine || physicsObjects.empty()) {
-        return;
-    }
-    
-    // Collect vertex data from all physics objects
-    std::vector<PhysicsObject::Vertex> allVertices;
-    
-    for (const auto& obj : physicsObjects) {
-        const auto& vertices = obj->getVertices();
-        allVertices.insert(allVertices.end(), vertices.begin(), vertices.end());
-    }
-    
-    if (allVertices.empty()) {
-        return;
-    }
-    
-    // Update vertex buffer
-    VkDeviceSize bufferSize = allVertices.size() * sizeof(PhysicsObject::Vertex);
-    
-    void* data;
-    vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
-    memcpy(data, allVertices.data(), (size_t)bufferSize);
-    vkUnmapMemory(device, vertexBufferMemory);
-}
 
 void initVulkan() {
     cout << "=== Initializing Vulkan ===" << endl;
@@ -990,16 +966,14 @@ void mainLoop() {
     cout << "Starting main loop..." << endl;
     
     int frameCount = 0;
+    double lastTime = glfwGetTime();
+
     while (!glfwWindowShouldClose(window)) {
+        double currentTime = glfwGetTime();
+        float deltaTime = static_cast<float>(currentTime - lastTime);
+        lastTime = currentTime;
+        
         glfwPollEvents();
-        
-        // Calculate frame time
-        auto currentTime = std::chrono::high_resolution_clock::now();
-        float deltaTime = std::chrono::duration<float>(currentTime - lastFrameTime).count();
-        lastFrameTime = currentTime;
-        
-        // Limit frame time to avoid large time steps
-        deltaTime = std::min(deltaTime, 0.016f); // Max 16ms
         
         // Update physics engine
         if (physicsEngine) {
@@ -1009,12 +983,8 @@ void mainLoop() {
         drawFrame();
         
         frameCount++;
-        if (frameCount % 60 == 0) {
-            cout << "Frame " << frameCount << " completed" << endl;
-        }
     }
     
-    cout << "Main loop ended after " << frameCount << " frames" << endl;
     vkDeviceWaitIdle(device);
 }
 
@@ -1036,9 +1006,6 @@ void drawFrame() {
     }
     // Mark the image as now being in use by this frame
     imagesInFlight[imageIndex] = inFlightFences[currentFrame];
-    
-    // Update vertex buffer data
-    updateVertexBufferData();
     
     // Reset command buffer
     vkResetCommandBuffer(commandBuffers[currentFrame], 0);
@@ -1115,22 +1082,19 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
     // Bind graphics pipeline
     vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
     
-    // Bind vertex buffer
-    VkBuffer vertexBuffers[] = {vertexBuffer};
-    VkDeviceSize offsets[] = {0};
-    vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
-    
-    // Render all physics objects
-    if (!physicsObjects.empty()) {
-        // Calculate total vertices
-        uint32_t totalVertices = 0;
-        for (const auto& obj : physicsObjects) {
-            totalVertices += static_cast<uint32_t>(obj->getVertices().size());
-        }
+    // Collect vertex data from all physics objects
+    std::vector<PhysicsObject::Vertex> allVertices;
+    for (const auto& obj : physicsObjects) {
+        const auto& vertices = obj->getVertices();
+        allVertices.insert(allVertices.end(), vertices.begin(), vertices.end());
+    }
+
+    if (!allVertices.empty()) {
+        // Update vertex buffer
+        renderer.updateVertexBuffer(device, vertexBufferMemory, allVertices);
         
-        if (totalVertices > 0) {
-            vkCmdDraw(commandBuffer, totalVertices, 1, 0, 0);
-        }
+        // Draw all objects
+        renderer.draw(commandBuffer, vertexBuffer, allVertices.size());
     }
     
     // End render pass
@@ -1144,7 +1108,7 @@ void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex) {
 int main() {
     try {
         // 设置控制台编码
-        setConsoleEncoding();
+        // setConsoleEncoding();
         
         initWindow();
         initVulkan();
